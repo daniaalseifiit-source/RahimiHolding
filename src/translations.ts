@@ -650,7 +650,7 @@ export const getProductsFa = (): Product[] => [
 
 **رویکرد ما:**
 * نصب شعله‌گیرها و ولوهای فشار/خلأ.
-* اجرای سیستم‌های گاز خنثی (Blanketing).
+* اجرای سیستم‌های گاز خنثی.
 * استفاده از پوشش‌های ضد الکترواستاتیک.`,
         category: "Services",
         image: "https://images.unsplash.com/photo-1535206587979-99443dc94cb7?q=80&w=800&auto=format&fit=crop",
@@ -886,7 +886,7 @@ export const getProductsAr = (): Product[] => [
 
 **نهجنا:**
 * تركيب مانعات اللهب وصمامات الضغط والتفريغ.
-* تنفيذ أنظمة تغطية الغاز الخامل (Blanketing).
+* تنفيذ أنظمة تغطية الغاز الخامل.
 * استخدام مواد وطلاءات متخصصة لتقليل المخاطر الكهروستاتيكية.`,
         category: "Services",
         image: "https://images.unsplash.com/photo-1535206587979-99443dc94cb7?q=80&w=800&auto=format&fit=crop",

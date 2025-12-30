@@ -86,3 +86,9 @@ export function addJsonLd(obj: object) {
 export function clearGeneratedMeta() {
   document.head.querySelectorAll('[data-generated="true"]').forEach((n) => n.remove());
 }
+
+export function processContent(content: string): string {
+  // Convert **text** to <strong>text</strong>
+  content = content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  return content;
+}

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { SITE_IMAGES, COMPANY_INFO } from '../constants';
 import { ArrowRight, ArrowLeft, X } from 'lucide-react';
-import { setMeta, addJsonLd } from '../utils/seo';
+import { setMeta, addJsonLd, processContent } from '../utils/seo';
 
 const Products: React.FC = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const { products, t, dir } = useLanguage();
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [filter, setFilter] = useState<'Trading' | 'Services'>('Trading');
@@ -35,6 +38,18 @@ const Products: React.FC = () => {
 
   // Number of invisible placeholders to add at the end of the grid
   const placeholdersCount = (columns - (displayedProducts.length % columns)) % columns;
+
+  // Initialize selected product from URL parameter
+  useEffect(() => {
+    if (id && products.length > 0) {
+      const product = products.find(p => p.id === parseInt(id));
+      if (product) {
+        setSelectedProduct(product);
+      }
+    } else if (!id) {
+      setSelectedProduct(null);
+    }
+  }, [id, products]);
 
   // Scroll to top when switching between list and detail view
   useEffect(() => {
@@ -125,7 +140,7 @@ const Products: React.FC = () => {
       dir={isRTL ? 'rtl' : 'ltr'}
     >
       <button
-        onClick={() => setSelectedProduct(null)}
+        onClick={() => navigate('/products')}
         className="mb-8 flex items-center text-rahimi-red font-bold hover:text-red-700 transition-colors group"
       >
         <span className={`transform transition-transform group-hover:${isRTL ? 'translate-x-1' : '-translate-x-1'}`}>
@@ -167,9 +182,10 @@ const Products: React.FC = () => {
               <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed font-medium italic border-l-4 border-rahimi-red pl-6">
                 {selectedProduct.description}
               </p>
-              <div className="text-gray-600 dark:text-gray-400 leading-relaxed text-base whitespace-pre-wrap prose-sm">
-                {selectedProduct.content}
-              </div>
+              <div
+                className="text-gray-600 dark:text-gray-400 leading-relaxed text-base whitespace-pre-wrap prose-sm"
+                dangerouslySetInnerHTML={{ __html: processContent(selectedProduct.content || '') }}
+              />
             </div>
 
             <div className="pt-8 border-t border-gray-200 dark:border-slate-700">
@@ -239,7 +255,7 @@ const Products: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                onClick={() => setSelectedProduct(product)}
+                onClick={() => navigate(`/products/${product.id}`)}
                 className="group flex flex-col bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100 dark:border-slate-700 cursor-pointer"
               >
                 {/* Image Header */}
@@ -276,7 +292,7 @@ const Products: React.FC = () => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        setSelectedProduct(product);
+                        navigate(`/products/${product.id}`);
                       }}
                       className="text-rahimi-red font-bold text-sm uppercase tracking-widest hover:text-red-700 transition-colors flex items-center group/btn"
                     >

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Product } from '../types';
 import { ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { setMeta, addJsonLd } from '../utils/seo';
+import { setMeta, addJsonLd, processContent } from '../utils/seo';
 import { COMPANY_INFO } from '../constants';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -73,7 +73,10 @@ const ProductDetail: React.FC<Props> = ({ product, onClose, onRequest }) => {
           )}
         </div>
         <div>
-          <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{product.content || product.description}</p>
+          <div
+            className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4 prose prose-sm"
+            dangerouslySetInnerHTML={{ __html: processContent(product.content || product.description) }}
+          />
 
           <div className="mt-6 space-y-3">
             <div className="flex items-center justify-between">
