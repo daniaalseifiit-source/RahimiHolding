@@ -1,5 +1,5 @@
 import { Product, BlogPost } from './types';
-import { PRODUCTS as BASE_PRODUCTS, BLOG_POSTS as BASE_BLOG_POSTS, CONTENT_BASE } from './constants';
+import { getProductsByLocale, getServicesByLocale, BLOG_POSTS as BASE_BLOG_POSTS, CONTENT_BASE } from './constants';
 
 export const translations = {
   en: {
@@ -110,6 +110,8 @@ export const translations = {
       visionDesc: 'To become a trusted global partner in oil, gas, and petrochemicals by combining international trading expertise with innovative safety technologies.',
       values: 'Our Values',
       valuesList: ['Integrity', 'Safety', 'Innovation', 'Sustainability', 'Customer Satisfaction'],
+      excellence: 'Excellence & Innovation',
+      excellenceDesc: 'We are committed to delivering excellence in every aspect of our business. Through continuous innovation and improvement, we maintain the highest standards in the energy trading and petrochemical sectors, ensuring sustainable growth and client satisfaction.',
       facilities: 'Our Facilities & Reach',
       officeOman: 'Head Office',
       officeIran: 'Subsidiary Office',
@@ -133,6 +135,7 @@ export const translations = {
       success: 'Request Sent Successfully!',
       successDesc: 'Please check your inbox. Our team will contact you shortly.',
       close: 'Close',
+      backToProducts: 'Back to Products',
     },
     contact: {
       title: 'Contact Rahimi Holding',
@@ -274,6 +277,8 @@ export const translations = {
       visionDesc: 'تبدیل شدن به شریک جهانی قابل‌اعتماد در نفت، گاز و پتروشیمی با ترکیب تخصص تجارت بین‌المللی و فناوری‌های نوین ایمنی.',
       values: 'ارزش‌های ما',
       valuesList: ['درستی', 'ایمنی', 'نوآوری', 'پایداری', 'رضایت‌مندی مشتری'],
+      excellence: 'تعالی و نوآوری',
+      excellenceDesc: 'ما متعهد به ارائه برتری در تمام جنبه‌های کسب‌وکار خود هستیم. از طریق نوآوری و بهبود مستمر، بالاترین استانداردها را در بخش‌های تجارت انرژی و پتروشیمی حفظ می‌کنیم و رشد پایدار و رضایت مشتری را تضمین می‌نماییم.',
       facilities: 'دفاتر و شبکه ما',
       officeOman: 'دفتر مرکزی',
       officeIran: 'دفتر شعبه',
@@ -297,6 +302,7 @@ export const translations = {
       success: 'درخواست با موفقیت ارسال شد!',
       successDesc: 'لطفاً صندوق ورودی خود را بررسی کنید. تیم ما به زودی با شما تماس می‌گیرد.',
       close: 'بستن',
+      backToProducts: 'بازگشت به محصولات',
     },
     contact: {
       title: 'تماس با رحیمی هولدینگ',
@@ -438,6 +444,8 @@ export const translations = {
       visionDesc: 'أن نصبح شريكاً عالمياً موثوقاً في النفط والغاز والبتروكيماويات من خلال الجمع بين خبرة التجارة الدولية والتقنيات الحديثة في مجال السلامة.',
       values: 'قيمنا',
       valuesList: ['النزاهة', 'السلامة', 'الابتكار', 'الاستدامة', 'رضا العملاء'],
+      excellence: 'التميز والابتكار',
+      excellenceDesc: 'نحن ملتزمون بتقديم التميز في كل جانب من جوانب أعمالنا. من خلال الابتكار والتحسين المستمر، نحافظ على أعلى المعايير في قطاعات تجارة الطاقة والبتروكيماويات، مما يضمن النمو المستدام ورضا العملاء.',
       facilities: 'مرافقنا والشبكة',
       officeOman: 'المقر الرئيسي',
       officeIran: 'المكتب الفرعي',
@@ -461,6 +469,7 @@ export const translations = {
       success: 'تم إرسال الطلب بنجاح!',
       successDesc: 'يرجى التحقق من صندوق البريد الوارد. سيتواصل فريقنا معك قريباً.',
       close: 'إغلاق',
+      backToProducts: 'العودة إلى المنتجات',
     },
     contact: {
       title: 'اتصل بمجموعة رحيمي',
@@ -973,7 +982,8 @@ export const getProductsAr = (): Product[] => [
 export const getProducts = (lang: string): Product[] => {
   if (lang === 'fa') return getProductsFa();
   if (lang === 'ar') return getProductsAr();
-  return BASE_PRODUCTS;
+  // English: combine products and services
+  return [...getProductsByLocale('en'), ...getServicesByLocale('en')];
 };
 
 export const getBlogPostsFa = (): BlogPost[] => [

@@ -139,16 +139,6 @@ const Products: React.FC = () => {
       className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
       dir={isRTL ? 'rtl' : 'ltr'}
     >
-      <button
-        onClick={() => navigate('/products')}
-        className="mb-8 flex items-center text-rahimi-red font-bold hover:text-red-700 transition-colors group"
-      >
-        <span className={`transform transition-transform group-hover:${isRTL ? 'translate-x-1' : '-translate-x-1'}`}>
-          {isRTL ? '→' : '←'}
-        </span>
-        <span className="mx-2 uppercase text-sm tracking-wider">← Back to Products</span>
-      </button>
-
       <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-2xl overflow-hidden border border-gray-100 dark:border-slate-700">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
           {/* Picture Column */}
@@ -198,6 +188,15 @@ const Products: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="mt-12">
+        <button
+          onClick={() => navigate('/products')}
+          className="inline-flex items-center gap-2 text-rahimi-red font-bold hover:text-red-700 transition-colors uppercase text-sm tracking-wider"
+        >
+          <ArrowIcon size={16} /> {t.products.backToProducts}
+        </button>
       </div>
     </motion.div>
   ) : (

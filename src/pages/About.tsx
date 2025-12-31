@@ -146,9 +146,9 @@ const About: React.FC = () => {
                   <div className="bg-rahimi-blue/10 dark:bg-slate-800 w-20 h-20 rounded-2xl flex items-center justify-center mb-8">
                     <Target className="text-rahimi-blue dark:text-blue-200" size={40} />
                   </div>
-                  <h3 className="text-3xl font-serif font-bold text-rahimi-blue dark:text-white mb-6">Excellence & Innovation</h3>
+                  <h3 className="text-3xl font-serif font-bold text-rahimi-blue dark:text-white mb-6">{t.about.excellence}</h3>
                   <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
-                    We are committed to delivering excellence in every aspect of our business. Through continuous innovation and improvement, we maintain the highest standards in the energy trading and petrochemical sectors, ensuring sustainable growth and client satisfaction.
+                    {t.about.excellenceDesc}
                   </p>
                 </div>
               </div>

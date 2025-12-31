@@ -4,7 +4,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { SITE_IMAGES, COMPANY_INFO } from '../constants';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
-import { setMeta, addJsonLd } from '../utils/seo';
+import { setMeta, addJsonLd, processContent } from '../utils/seo';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams();
@@ -82,9 +82,10 @@ const BlogPost: React.FC = () => {
       <div className="container mx-auto px-6 py-16">
         <div className="max-w-4xl mx-auto">
           <img src={post.image} alt={post.title} className="w-full h-96 object-cover rounded-2xl shadow-lg mb-8" />
-          <div className="prose dark:prose-invert max-w-none">
-            <p>{post.content || post.excerpt}</p>
-          </div>
+          <div
+            className="prose dark:prose-invert max-w-none"
+            dangerouslySetInnerHTML={{ __html: processContent(post.content || post.excerpt) }}
+          />
           <div className="mt-12">
             <Link to="/blog" className="inline-flex items-center gap-2 text-rahimi-red font-bold">
               <ArrowLeft size={16} /> {t.blog.backToList || 'Back to Blog'}
